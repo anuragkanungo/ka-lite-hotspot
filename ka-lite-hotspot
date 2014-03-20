@@ -21,6 +21,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this script. If not, see <http://www.gnu.org/licenses/>.
 
+export DISPLAY=":0.0"
+
 # Global variables
 logfile="/tmp/hostapd.log"
 pidfile="/var/run/ka-lite-hotspot.pid"
@@ -28,11 +30,9 @@ ifacefile="/tmp/interface.name"
 hotspotconfig="/etc/hostapd-hotspot.conf"
 dnsmasqconfig="/etc/dnsmasq.conf"
 user=$(who | grep $(echo "$DISPLAY" | cut -d '.' -f 1) | cut -d ' ' -f 1 | tail -1)
-SSID="kalite"
+ssid="kalite"
+subnet="1.1.1"
 
-echo "run" >> /tmp/out.txt
-
-export DISPLAY=":0.0"
 
 show_msg() {
 echo -e "$@"
@@ -124,7 +124,7 @@ sed -i "s/bind-interfaces//g" "$dnsmasqconfig"
 sed -i "s/# Choose interface for binding//g" "$dnsmasqconfig"
 sed -i "s/^interface=.*//g" "$dnsmasqconfig"
 sed -i "s/# Specify range of IP addresses for DHCP leasses//g" "$dnsmasqconfig"
-sed -i "s/dhcp-range=1.1.1.2.*//g" "$dnsmasqconfig"
+sed -i "s/dhcp-range=$subnet.2.*//g" "$dnsmasqconfig"
 cat -s "$dnsmasqconfig" | tee "$dnsmasqconfig" > /dev/null 2>&1
 
 # First, try to find Wi-Pi dongles that are connected (these start with MAC address 00:0f:13)
@@ -147,7 +147,7 @@ cat <<EOF | tee "$hotspotconfig" > /dev/null 2>&1
 interface=$INTERFACE_WLAN
 driver=nl80211
 #Access Point
-ssid=$SSID
+ssid=$ssid
 hw_mode=g
 # WiFi Channel:
 channel=1
@@ -158,22 +158,21 @@ EOF
 
 # Add the required bits to the dnsmasq config file
 if [[ ! $(grep "Bind to only one interface" "$dnsmasqconfig") ]]; then
-cat <<EOF | tee -a "$dnsmasqconfig" > /dev/null 2>&1
+cat <<EOF | tee "$dnsmasqconfig" > /dev/null 2>&1
 # Bind to only one interface
 bind-interfaces
 # Choose interface for binding
 interface=$INTERFACE_WLAN
 # Resolve all incoming DNS requests to our own IP
-address=/#/1.1.1.1
+address=/#/$subnet.1
 # Don't require fully qualified domain names
 expand-hosts
 # Set the local domain to "kalite"
 domain=kalite
-except-interface=lo
-# listen-address=1.1.1.1
+# Set the DNS server to listen on the wifi dongle's IP
+listen-address=$subnet.1
 # Specify range of IP addresses for DHCP leasses
-dhcp-range=1.1.1.2,1.1.1.200,3h
-# except-interface=lo
+dhcp-range=$subnet.2,$subnet.200,3h
 EOF
 fi
 }
@@ -209,7 +208,7 @@ update-rc.d hostapd disable 2>&1 | show_debug
 update-rc.d dnsmasq disable 2>&1 | show_debug
 
 # Configure IP address for WLAN
-ifconfig "$INTERFACE_WLAN" 1.1.1.1 2>&1 | show_debug
+ifconfig "$INTERFACE_WLAN" $subnet.1 2>&1 | show_debug
 
 # Backup resolve.conf file
 cp /etc/resolv.conf /etc/resolv.conf.backup 2>&1 | show_debug
