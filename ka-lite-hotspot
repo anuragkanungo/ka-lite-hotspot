@@ -211,8 +211,14 @@ update-rc.d dnsmasq disable 2>&1 | show_debug
 # Configure IP address for WLAN
 ifconfig "$INTERFACE_WLAN" 1.1.1.1 2>&1 | show_debug
 
+# Backup resolve.conf file
+cp /etc/resolv.conf /etc/resolv.conf.backup 2>&1 | show_debug
+
 # Start DHCP/DNS server
 service dnsmasq restart 2>&1 | show_debug
+
+# Restore resolve.conf file
+mv /etc/resolv.conf.backup /etc/resolv.conf 2>&1 | show_debug
 
 # Run access point daemon
 if [[ $(hostapd --help 2>&1 | grep "\-f") ]]; then
