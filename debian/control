@@ -1,0 +1,16 @@
+Source: ka-lite-hotspot
+Section: gnome
+Priority: extra
+Maintainer: Jamie Alexandre <jamie@learningequality.org>
+Build-Depends: 	debhelper (>= 7.0.50~)
+Standards-Version: 3.9.3
+Homepage: http://www.webupd8.org/
+
+Package: ka-lite-hotspot
+Architecture: all
+Depends: hostapd,
+		 dnsmasq,
+		 iw
+Description: Hotspot for KA Lite
+ .
+ A script to create an infrastructure WiFi hotspot (access point mode) in Ubuntu for accessing KA Lite.
