@@ -1,4 +1,4 @@
 ka-lite-hotspot usr/bin/
 ka-lite-hotspot-service.sh usr/bin/
-95-ka-lite-hotspot.rules etc/udev/rules.d/
+95-ka-lite-hotspot.rules lib/udev/rules.d/
 ka-lite-hotspot.conf etc/init/
