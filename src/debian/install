@@ -1,4 +1,5 @@
-ka-lite-hotspot usr/bin/
-ka-lite-hotspot-service.sh usr/bin/
+ka-lite-hotspot usr/sbin/
+redirect_port80_to_port8008.py usr/sbin/
+ka-lite-hotspot-service.sh usr/sbin/
 95-ka-lite-hotspot.rules lib/udev/rules.d/
 ka-lite-hotspot.conf etc/init/

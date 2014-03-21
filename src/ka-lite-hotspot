@@ -26,6 +26,7 @@ export DISPLAY=":0.0"
 # Global variables
 logfile="/tmp/hostapd.log"
 pidfile="/var/run/ka-lite-hotspot.pid"
+redirect_pidfile="/var/run/ka-lite-redirect.pid"
 ifacefile="/tmp/interface.name"
 hotspotconfig="/etc/hostapd-hotspot.conf"
 dnsmasqconfig="/etc/dnsmasq.conf"
@@ -222,6 +223,10 @@ service dnsmasq restart 2>&1 | show_debug
 # Restore resolve.conf file
 mv /etc/resolv.conf.backup /etc/resolv.conf 2>&1 | show_debug
 
+# Run port redirect script in background
+python redirect_port80_to_port8008.py & 2>&1 | show_debug
+echo "$!" > "$redirect_pidfile"
+
 # Run access point daemon
 if [[ $(hostapd --help 2>&1 | grep "\-f") ]]; then
 	rm -f "$logfile"
@@ -270,6 +275,13 @@ rm -f "$ifacefile"
 
 # Delete log
 rm -f "$logfile"
+
+# Try to read the pid for the redirect script, and kill the process
+if [[ -f "$redirect_pidfile" ]]; then
+	REDIRECT_PID=$(cat "$redirect_pidfile")
+	rm "$redirect_pidfile" 2>&1 | show_debug
+	kill -9 $REDIRECT_PID 2>&1 | show_debug
+fi
 
 # Shut down the services
 service hostapd stop 2>&1 | show_debug
