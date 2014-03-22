@@ -1,2 +1,2 @@
-ACTION=="add", ENV{ID_VENDOR_ID}=="148f", RUN+="/usr/bin/ka-lite-hotspot-service.sh start"
-ACTION=="remove", ENV{ID_VENDOR_ID}=="148f", RUN+="/usr/bin/ka-lite-hotspot-service.sh stop"
+ACTION=="add", ENV{ID_VENDOR_ID}=="148f", RUN+="/usr/sbin/ka-lite-hotspot-service.sh start"
+ACTION=="remove", ENV{ID_VENDOR_ID}=="148f", RUN+="/usr/sbin/ka-lite-hotspot-service.sh stop"
