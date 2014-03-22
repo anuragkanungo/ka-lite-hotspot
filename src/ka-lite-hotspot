@@ -101,6 +101,8 @@ elif [[ ! $(iwconfig "$INTERFACE_WLAN" 2>&1 | grep "ESSID:off/any") && $(iwconfi
 	show_err "Please disconnect WiFi before proceeding"
 	exit 1
 fi
+# ensure that the adapter has been brought up
+ifconfig "$INTERFACE_WLAN" up 2>&1 | show_debug
 }
 
 
