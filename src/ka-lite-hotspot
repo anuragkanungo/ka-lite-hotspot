@@ -231,7 +231,7 @@ service dnsmasq restart 2>&1 | show_debug
 mv /etc/resolv.conf.backup /etc/resolv.conf 2>&1 | show_debug
 
 # Run port redirect script in background
-python "$( cd "$( dirname "$0" )" && pwd )/redirect_port80_to_port8008.py" & 2>&1 | show_debug
+"$( cd "$( dirname "$0" )" && pwd )/redirect_port80_to_port8008.py" & 2>&1 | show_debug
 echo "$!" > "$redirect_pidfile"
 
 # Run access point daemon
