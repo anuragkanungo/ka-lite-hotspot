@@ -18,7 +18,11 @@ class RedirectHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.do_HEAD()
 
 if __name__ == '__main__':
-    httpd = BaseHTTPServer.HTTPServer(("", 80), RedirectHandler)
+    try:
+        httpd = BaseHTTPServer.HTTPServer(("", 80), RedirectHandler)
+    except:
+        # print "Port 80 is in use or could not be acquired; exiting redirect script."
+        exit(1)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
