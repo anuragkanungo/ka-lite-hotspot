@@ -34,6 +34,11 @@ user=$(who | grep $(echo "$DISPLAY" | cut -d '.' -f 1) | cut -d ' ' -f 1 | tail 
 ssid="kalite"
 subnet="1.1.1"
 
+# If we were unable to determine the user, just use the first user listed
+if [[ ! $user ]]; then
+	user=$(ls /home | head -n 1)
+fi
+
 
 show_msg() {
 echo -e "$@"
