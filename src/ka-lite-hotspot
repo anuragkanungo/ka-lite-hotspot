@@ -187,6 +187,10 @@ fi
 
 
 start() {
+
+# Sleep, to ensure the network interface is fully initialized before we start
+sleep 5
+
 # Check previous process
 if [[ -f "$pidfile" ]]; then
 	show_warn "Another process is already running; stopping it first"
