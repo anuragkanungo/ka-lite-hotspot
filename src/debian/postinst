@@ -8,12 +8,9 @@ echo "$var1 ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 
 mv /tmp/hotspot.desktop /home/$var1/Desktop/hotspot.desktop
 chmod 777 /home/$var1/Desktop/hotspot.desktop
-mv /home/$var1/Desktop/hotspot.desktop /home/$var1/Desktop/hotspot
-
 
 mv /tmp/internet.desktop /home/$var1/Desktop/internet.desktop
 chmod 777 /home/$var1/Desktop/internet.desktop
-mv /home/$var1/Desktop/internet.desktop /home/$var1/Desktop/internet
 
 
 #DEBHELPER#
