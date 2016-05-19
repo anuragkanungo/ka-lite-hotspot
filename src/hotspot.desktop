@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Exec=sudo /etc/init.d/ka-lite-hotspot start
+Terminal=true

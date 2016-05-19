@@ -1,2 +1,4 @@
 ka-lite-hotspot etc/init.d/
 95-ka-lite-hotspot.rules lib/udev/rules.d/
+hotspot.desktop /usr/share/applications/
+internet.desktop /usr/share/applications/
