@@ -3,7 +3,7 @@ Section: gnome
 Priority: extra
 Maintainer: Jamie Alexandre <jamie@learningequality.org>
 Build-Depends: 	debhelper (>= 9)
-Standards-Version: 3.9.4
+Standards-Version: 4.0
 Homepage: https://learningequality.org/
 
 Package: ka-lite-hotspot

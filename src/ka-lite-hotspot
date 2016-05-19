@@ -193,6 +193,8 @@ fi
 # Catch attempts to kill us, and die gracefully after stopping
 trap "stop; exit" SIGHUP SIGINT SIGTERM
 
+service network-manager stop 2>&1 | show_debug
+
 # Run the configure script to get device info, setup the config files, etc
 configure
 
@@ -284,6 +286,8 @@ service dnsmasq stop 2>&1 | show_debug
 ifconfig "mon.$INTERFACE_WLAN" down 2>&1 | show_debug
 ifconfig "$INTERFACE_WLAN" down 2>&1 | show_debug
 ifconfig "$INTERFACE_WLAN" up 2>&1 | show_debug
+
+service network-manager restart 2>&1 | show_debug
 
 }
 
