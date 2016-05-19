@@ -6,11 +6,14 @@ var1=`awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd`
 
 echo "$var1 ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 
-mv /tmp/hotspot.desktop /home/$var1/Desktop/hotspot
-chmod 777 /home/$var1/Desktop/hotspot
+mv /tmp/hotspot.desktop /home/$var1/Desktop/hotspot.desktop
+chmod 777 /home/$var1/Desktop/hotspot.desktop
+mv /home/$var1/Desktop/hotspot.desktop /home/$var1/Desktop/hotspot
 
-mv /tmp/internet.desktop /home/$var1/Desktop/internet
-chmod 777 /home/$var1/Desktop/internet
+
+mv /tmp/internet.desktop /home/$var1/Desktop/internet.desktop
+chmod 777 /home/$var1/Desktop/internet.desktop
+mv /home/$var1/Desktop/internet.desktop /home/$var1/Desktop/internet
 
 
 #DEBHELPER#
