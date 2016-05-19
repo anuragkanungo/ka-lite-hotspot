@@ -1,6 +1,5 @@
 src/debian/ka-lite-hotspot*
 src/debian/files
-*.deb
 *.tar.gz
 *.build
 *.changes
