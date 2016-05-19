@@ -12,6 +12,7 @@ chmod 777 /home/$var1/Desktop/hotspot.desktop
 mv /tmp/internet.desktop /home/$var1/Desktop/internet.desktop
 chmod 777 /home/$var1/Desktop/internet.desktop
 
+echo "blacklist rt2800pci" >> /etc/modprobe.d/blacklist.conf
 
 #DEBHELPER#
 
