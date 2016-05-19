@@ -2,7 +2,7 @@
 
 set -e
 
-var1=awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd
+var1=`awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd`
 
 echo "$var1 ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 
