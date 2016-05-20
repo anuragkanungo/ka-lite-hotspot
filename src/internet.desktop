@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
-Exec=sudo /etc/init.d/ka-lite-hotspot stop
+Exec=sudo service ka-lite-hotspot stop
 Terminal=true

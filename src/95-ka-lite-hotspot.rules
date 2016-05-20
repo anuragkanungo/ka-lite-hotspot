@@ -1,2 +1,0 @@
-ACTION=="add", ENV{ID_VENDOR_ID}=="148f", RUN+="/etc/init.d/ka-lite-hotspot start"
-ACTION=="remove", ENV{ID_VENDOR_ID}=="148f", RUN+="/etc/init.d/ka-lite-hotspot stop"
