@@ -286,7 +286,7 @@ service dnsmasq stop 2>&1 | show_debug
 ifconfig "mon.$INTERFACE_WLAN" down 2>&1 | show_debug
 ifconfig "$INTERFACE_WLAN" down 2>&1 | show_debug
 ifconfig "$INTERFACE_WLAN" up 2>&1 | show_debug
-
+grep -q -F 'nameserver 8.8.8.8' /etc/resolv.conf || echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 service network-manager restart 2>&1 | show_debug
 
 }
